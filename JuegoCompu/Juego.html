@@ -48,6 +48,7 @@
         this.load.image('materiales', 'assets/Materiales.png');
         this.load.spritesheet('block', 'assets/Block.png', { frameWidth: 291, frameHeight: 180 });
         this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.audio('bloqueS', 'sounds/Bloque.mp3');
     }
 
     var platforms;
@@ -69,6 +70,8 @@
         this.add.image(3300, 300, 'fondo');
         this.add.image(3900, 300, 'fondo22');
         this.add.image(4500, 300, 'fondo2');
+
+        this.BloqueS = this.sound.add('bloqueS');
 
         this.physics.add.image(620, 0, 'star');
         var materiales1 = this.physics.add.staticGroup();
@@ -370,6 +373,7 @@ function createBullet() {
                 var blockY = pointer.y;
 
                 var block = this.physics.add.sprite(blockX, blockY, 'block');
+                this.BloqueS.play();
                 block.setOrigin(0.5);
                 block.setScale(0.18);
                 block.setCollideWorldBounds(true);
@@ -378,6 +382,7 @@ function createBullet() {
                 this.physics.add.collider(player, block);
                 this.physics.add.collider(stars, block);
                 nmateriales--;
+
 
                 setTimeout(() => {
                     block.destroy();
